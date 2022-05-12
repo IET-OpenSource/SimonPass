@@ -1,0 +1,396 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Authentication Framework API",
+    "version" : "v1"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8433",
+    "description" : "Generated server url"
+  } ],
+  "paths" : {
+    "/**" : {
+      "get" : {
+        "tags" : [ "private-path-controller" ],
+        "operationId" : "proxyGet",
+        "parameters" : [ {
+          "name" : "proxy",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/ProxyExchangeByte[]"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "private-path-controller" ],
+        "operationId" : "proxyPut",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ProxyExchangeByte[]"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "private-path-controller" ],
+        "operationId" : "proxyPost",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ProxyExchangeByte[]"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/admin/change-role" : {
+      "post" : {
+        "tags" : [ "authentication-controller" ],
+        "summary" : "Change role of the specific user",
+        "description" : "ROLE_ADMIN",
+        "operationId" : "changeRole",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ChangeRoleDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/update-password" : {
+      "post" : {
+        "tags" : [ "authentication-controller" ],
+        "operationId" : "updatePassword",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateUserPasswordDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/signup" : {
+      "post" : {
+        "tags" : [ "authentication-controller" ],
+        "operationId" : "signUp",
+        "parameters" : [ {
+          "name" : "Sign-Token",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SignUpDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/reset-password" : {
+      "post" : {
+        "tags" : [ "authentication-controller" ],
+        "operationId" : "resetPassword",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/login" : {
+      "post" : {
+        "tags" : [ "authentication-controller" ],
+        "operationId" : "createAuthenticationToken",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/JwtAuthenticationRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/confirm-email" : {
+      "post" : {
+        "tags" : [ "authentication-controller" ],
+        "operationId" : "confirmEmail",
+        "parameters" : [ {
+          "name" : "confirmToken",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/admin/get-all" : {
+      "get" : {
+        "tags" : [ "authentication-controller" ],
+        "summary" : "Retrieve a user List",
+        "description" : "ROLE_ADMIN",
+        "operationId" : "getAllUsers",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseWrapper"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "andRoles" : [ "ROLE_ADMIN" ]
+        } ]
+      }
+    },
+    "/auth/refreshed-token" : {
+      "get" : {
+        "tags" : [ "authentication-controller" ],
+        "operationId" : "refreshAndGetAuthenticationToken",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ProxyExchangeByte[]" : {
+        "type" : "object"
+      },
+      "ChangeRoleDTO" : {
+        "type" : "object",
+        "properties" : {
+          "userMail" : {
+            "type" : "string"
+          },
+          "role" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ResponseWrapper" : {
+        "type" : "object",
+        "properties" : {
+          "exception" : {
+            "type" : "string"
+          },
+          "info" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "object"
+          },
+          "errorID" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "UpdateUserPasswordDTO" : {
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "SignUpDTO" : {
+        "type" : "object",
+        "properties" : {
+          "creationDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "lastModifiedDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "deleted" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "JwtAuthenticationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "rememberMe" : {
+            "type" : "boolean"
+          }
+        }
+      }
+    }
+  }
+}
